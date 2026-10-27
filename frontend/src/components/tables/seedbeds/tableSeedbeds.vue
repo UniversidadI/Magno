@@ -71,10 +71,6 @@
               <h3 class="text-subtitle-1 mb-2">Información General</h3>
             </VCol>
 
-            <VCol cols="12" md="6">
-              <div class="text-caption text-medium-emphasis">ID</div>
-              <div class="text-body-2">{{ selectedSeedbed.id }}</div>
-            </VCol>
 
             <VCol cols="12" md="6">
               <div class="text-caption text-medium-emphasis">Nombre</div>
@@ -152,7 +148,6 @@ export default defineComponent({
       detailDialog: false,
       selectedSeedbed: null as Item | null,
       headers: [
-        {title: 'ID', key: 'id'},
         {title: 'Nombre', key: 'name'},
         {title: 'Linea de investigación', key: 'line_of_research'},
         {title: 'Fecha de creación', key: 'creation_date'},

@@ -98,7 +98,6 @@ export default defineComponent({
       search: '',
       links: '',
       headers: [
-        {title: 'ID', key: 'id'},
         {title: 'Nombre', key: 'research_seedbed.name'},
         {title: 'coordinator', key: 'coordinator.user.full_name'},
         {title: 'Tutor', key: 'tutor.user.full_name'},
