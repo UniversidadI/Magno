@@ -166,12 +166,23 @@ const academicTools: Tool[] = [
 }
 
 .icon-only-list .v-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0 !important;
   min-height: 40px;
 }
 
-.icon-only-list .v-list-item__prepend {
+.icon-only-list :deep(.v-list-item__prepend) {
   margin: 0 !important;
+}
+
+.icon-only-list :deep(.v-list-item__content) {
+  display: none;
+}
+
+.icon-only-list :deep(.v-list-item__spacer) {
+  display: none;
 }
 
 .tool-logo {
