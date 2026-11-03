@@ -63,7 +63,7 @@ Magno/
 
 ### Prerequisites
 - JDK 17 or higher
-- Node.js (v18+)
+- Node.js (v26.13.0)
 - PostgreSQL Database
 
 ### Installation
@@ -82,8 +82,8 @@ Magno/
 3. **Frontend Setup:**
    Navigate to `frontend/`, install dependencies and start the dev server:
    ```bash
-   npm install
-   npm run dev
+   pnpm install
+   pnpm dev
    ```
 
 ---

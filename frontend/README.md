@@ -25,14 +25,14 @@ This is the client-side application for the **Magno** Research Seedbeds Manageme
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 ```
 
 ### Development
 
 ```bash
 # Start development server
-npm run dev
+pnpm dev
 ```
 The application will be available at `http://localhost:3000` (by default).
 
@@ -40,10 +40,10 @@ The application will be available at `http://localhost:3000` (by default).
 
 ```bash
 # Build for production
-npm run build
+pnpm run build
 
 # Preview production build
-npm run preview
+pnpm run preview
 ```
 
 ## 📂 Architecture

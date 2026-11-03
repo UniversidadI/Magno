@@ -277,7 +277,7 @@ export default defineComponent({
       }
 
       const baseName = reportNames[this.reportData.reportType as keyof typeof reportNames]
-      let periodInfo = ''
+      let periodInfo: string = ''
 
       if (this.reportData.periodType === 'consolidate') {
         const period1 = this.academicPeriods.find(p => p.id === this.reportData.academicPeriodId)
