@@ -14,6 +14,7 @@
 // ...existing code...
 import { defineComponent } from 'vue';
 import API from '@/utils/api';
+import { buildUserOptions } from '@/utils/userOptions';
 export default defineComponent({
   name: 'formCreateSeedbedProfile',
   props:{
@@ -63,10 +64,7 @@ export default defineComponent({
         console.log(students);
 
         // Create the options list once
-        const functionaryOptions = students.map((functionary: any) => ({
-          label: functionary.full_name,
-          value: functionary.id,
-        }));
+        const functionaryOptions = buildUserOptions(students);
 
         // Update all matching fields, not just the first one
         this.fields.forEach(field => {

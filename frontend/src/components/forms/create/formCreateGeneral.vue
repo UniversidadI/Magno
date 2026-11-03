@@ -37,6 +37,7 @@
             :items="field.options"
             item-title="label"
             item-value="value"
+            :custom-filter="customAutocompleteFilter"
             :disabled="field.disabled"
             :required="field.required"
             clearable
@@ -51,6 +52,7 @@
             :items="field.options"
             item-title="label"
             item-value="value"
+            :custom-filter="customAutocompleteFilter"
             :label="field.label"
             class="mb-5"
           />
@@ -81,6 +83,7 @@ import { defineComponent } from 'vue'
 import API from "@/utils/api";
 import { VAutocomplete } from 'vuetify/components';
 import { useFeedbackToast } from '@/composables/useFeedbackToast';
+import { userAutocompleteFilter } from '@/utils/userOptions';
 
 export default defineComponent({
   name: 'formEditGeneral',
@@ -129,6 +132,10 @@ export default defineComponent({
       }
       return values;
     },
+    customAutocompleteFilter(value: string, query: string, item?: any) {
+      return userAutocompleteFilter(value, query, item);
+    },
+
     handleFieldChange(fieldKey: string | number, value: null) {
       this.formValues[fieldKey] = value;
 
