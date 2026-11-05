@@ -14,6 +14,7 @@
 // ...existing code...
 import { defineComponent } from 'vue';
 import API from '@/utils/api';
+import { buildUserOptions } from '@/utils/userOptions';
 export default defineComponent({
   name: 'formCreateGroupProfile',
   props:{
@@ -58,10 +59,7 @@ export default defineComponent({
 
         const functionaryField = this.fields.find(f => f.key === 'coordinator_id' )
         if (functionaryField) {
-          functionaryField.options = functionaries.map((functionary: any) => ({
-            label: functionary.full_name,
-            value: functionary.id,
-          }));
+          functionaryField.options = buildUserOptions(functionaries);
         }
       } catch (error) {
         console.error('Error fetching users:', error);

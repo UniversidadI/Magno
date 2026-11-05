@@ -385,6 +385,7 @@ public class IntegraUserClient implements IIntegraPersistencePort {
         List<AcademiaAcademicProgram> academiaUndergrad = getAcademiaAcademicPrograms1();
         List<AcademiaAcademicProgram> academiaPostgrad = getAcademiaAcademicPrograms2();
 
+
         // Undergraduate programs
         List<IntegraAcademicProgram> undergradPrograms = new ArrayList<>();
         undergradPrograms.addAll(integraPrograms);

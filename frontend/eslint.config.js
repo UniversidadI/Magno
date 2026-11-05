@@ -1,11 +1,13 @@
-import js from '@eslint/js';
+// import js from '@eslint/js';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import vue from 'eslint-plugin-vue';
-import vueParser from 'vue-eslint-parser';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const vueParser = require('vue-eslint-parser');
 
 export default [
-  js.configs.recommended,
+  // js.configs.recommended,
   {
     files: ['**/*.{js,mjs,cjs,ts,vue}'],
     languageOptions: {

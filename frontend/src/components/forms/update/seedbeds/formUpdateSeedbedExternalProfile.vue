@@ -15,6 +15,7 @@
 // ...existing code...
 import { defineComponent } from 'vue';
 import API from "@/utils/api";
+import { buildUserOptions } from '@/utils/userOptions';
 
 export default defineComponent({
   name: 'formUpdateSeedbedExternalProfile',
@@ -254,10 +255,7 @@ export default defineComponent({
 
         if (userField) {
           if (users && users.length > 0) {
-            userField.options = users.map((user: any) => ({
-              label: user.full_name,
-              value: user.id,
-            }));
+            userField.options = buildUserOptions(users);
             // Enable country and type fields when external users are available
             this.enableField('country');
             this.enableField('type_of_external_user');

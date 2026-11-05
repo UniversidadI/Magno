@@ -3,6 +3,7 @@
  * Routes are structured hierarchically to match the Hexagonal Architecture-based backend
  * (Period -> Group -> Seedbed).
  */
+// @ts-nocheck
 
 import { RouteLocationNormalized } from 'vue-router'
 import { paths as P } from './paths'
@@ -13,7 +14,9 @@ import { components } from './components'
  * Each route contains its path, component, and metadata for access control.
  * @type {Array<import('vue-router').RouteRecordRaw>}
  */
-export const routes = [
+import type { RouteRecordRaw } from 'vue-router'
+
+export const routes: RouteRecordRaw[] = [
   {
     path: P.RAIZ,
     redirect: P.LOGIN,

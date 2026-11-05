@@ -14,6 +14,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import API from '@/utils/api';
+import { buildUserOptions } from '@/utils/userOptions';
 import formCreateGeneral from '@/components/forms/create/formCreateGeneral.vue';
 
 export default defineComponent({
@@ -248,10 +249,7 @@ export default defineComponent({
 
         if (userField) {
           if (users && users.length > 0) {
-            userField.options = users.map((group: any) => ({
-              label: group.full_name,
-              value: group.id,
-            }));
+            userField.options = buildUserOptions(users);
             // Enable country and type fields when external users are available
             this.enableField('country');
             this.enableField('type_of_external_user');

@@ -45,7 +45,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
                 .build();
 
         response.addHeader("Set-Cookie", cookie.toString());
-        response.sendRedirect(successRedirectUrl);
+        response.sendRedirect(successRedirectUrl.strip());
     }
 
 }
