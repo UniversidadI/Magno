@@ -84,10 +84,10 @@ jobs:
         run: |
           echo "$VPN_PASSWORD" | sudo openconnect \
           --protocol=gp \
-          --user=$secrets.VPN_USER \
+          --user=$VPN_USER \
           --passwd-on-stdin \
           --servercert "pin-sha256:$SERVER_CERT" \
-          $secrets.VPN_HOST -b
+          $VPN_HOST -b
           sleep 10
       - name: Set up Node.js
         uses: actions/setup-node@v4
