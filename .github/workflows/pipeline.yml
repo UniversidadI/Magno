@@ -18,6 +18,7 @@ env:
   VPN_PASSWORD: ${{ secrets.VPN_PASSWORD }}
   VPN_USER: ${{ secrets.VPN_USER }}
   VPN_HOST: ${{ secrets.VPN_HOST }}
+  SERVER_CERT: ${{ secrets.SERVER_CERT }}
 
 jobs:
   prepare:
@@ -85,7 +86,7 @@ jobs:
           --protocol=gp \
           --user=$secrets.VPN_USER \
           --passwd-on-stdin \
-          --servercert pin-sha256:$secrets.SERVER_CERT \
+          --servercert "pin-sha256:$SERVER_CERT" \
           $secrets.VPN_HOST -b
           sleep 10
       - name: Set up Node.js
@@ -119,7 +120,7 @@ jobs:
           --os=win \
           --user="$VPN_USER" \
           --passwd-on-stdin \
-          --servercert pin-sha256:$secrets.SERVER_CERT \
+          --servercert "pin-sha256:$SERVER_CERT" \
           "$VPN_HOST" -b
         
       - name: Test internal connectivity with SSH
@@ -195,7 +196,7 @@ jobs:
           --protocol=gp \
           --user=${{ secrets.VPN_USER }} \
           --passwd-on-stdin \
-          --servercert pin-sha256:${{ secrets.SERVER_CERT }} \
+          --servercert "pin-sha256:$SERVER_CERT" \
           ${{ secrets.VPN_HOST }} -b
           sleep 10
       - name: Deploy to Remote Server
