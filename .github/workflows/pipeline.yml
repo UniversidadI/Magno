@@ -9,6 +9,13 @@ on:
 permissions:
   contents: write
 
+env:
+  APP_DIR: /home/semillero/magno
+  REPO_URL: github.com/UniversidadI/Magno.git
+  INTERNAL_SSH_PASSWORD: ${{ secrets.INTERNAL_SSH_PASSWORD }}
+  INTERNAL_USER: ${{ secrets.INTERNAL_USER }}
+  INTERNAL_RESOURCE_IP: ${{ secrets.INTERNAL_RESOURCE_IP }}
+
 jobs:
   prepare:
     name: Prepare Workflow
@@ -103,10 +110,6 @@ jobs:
       - name: Install sshpass and OpenConnect
         run: sudo apt-get update && sudo apt-get install -y openconnect sshpass
       - name: Connect to VPN
-        env:
-          VPN_PASSWORD: ${{ secrets.VPN_PASSWORD }}
-          VPN_USER: ${{ secrets.VPN_USER }}
-          VPN_HOST: ${{ secrets.VPN_HOST }}
         run: |
           echo "$VPN_PASSWORD" | sudo openconnect \
           --protocol=gp \
@@ -117,25 +120,22 @@ jobs:
           "$VPN_HOST" -b
         
       - name: Test internal connectivity with SSH
-        env:
-          INTERNAL_SSH_PASSWORD: ${{ secrets.INTERNAL_SSH_PASSWORD }}
-          INTERNAL_USER: ${{ secrets.INTERNAL_USER }}
-          INTERNAL_RESOURCE_IP: ${{ secrets.INTERNAL_RESOURCE_IP }}
         run: |
           sshpass -p "$INTERNAL_SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $INTERNAL_USER@$INTERNAL_RESOURCE_IP 'echo "SSH connection successful"'
         
-      - name: Deploy to Remote Server
+      - name: Send env file to server
         run: |
           # Create the .env.prod file locally first to avoid shell expansion issues
           cat << 'EOF_SECRET' > .env.prod
           ${{ secrets.APP_ENV_PROD }}
           EOF_SECRET
 
-          # Create directory and transfer the file
-          sshpass -p "${{ secrets.INTERNAL_SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.INTERNAL_USER }}@${{ secrets.INTERNAL_RESOURCE_IP }} "mkdir -p ~/magno/backend"
-          sshpass -p "${{ secrets.INTERNAL_SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no .env.prod ${{ secrets.INTERNAL_USER }}@${{ secrets.INTERNAL_RESOURCE_IP }}:~/magno/backend/.env.prod
-
-          sshpass -p "${{ secrets.INTERNAL_SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.INTERNAL_USER }}@${{ secrets.INTERNAL_RESOURCE_IP }} << 'EOF'
+          sshpass -p "$INTERNAL_SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $INTERNAL_USER@$INTERNAL_RESOURCE_IP mkdir -p "$APP_DIR"/backend
+          sshpass -p "$INTERNAL_SSH_PASSWORD" scp -o StrictHostKeyChecking=no .env.prod $INTERNAL_USER@$INTERNAL_RESOURCE_IP:"$APP_DIR"/backend/.env.prod
+        
+      - name: Deploy to Remote Server
+        run: |
+          sshpass -p "$INTERNAL_SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $INTERNAL_USER@$INTERNAL_RESOURCE_IP << 'EOF'
             set -e
             cd ~/magno/ || exit;
             if [ ! -d ".git" ]; then
