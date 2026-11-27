@@ -78,6 +78,10 @@ jobs:
           --servercert pin-sha256:${{ secrets.SERVER_CERT }} \
           ${{ secrets.VPN_HOST }} -b
           sleep 10
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          package_json_file: frontend/package.json
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
