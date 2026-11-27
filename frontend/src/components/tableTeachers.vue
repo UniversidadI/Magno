@@ -1,3 +1,5 @@
 <script lang="ts">
-export { default } from "./tables/lounge/tableTeachers.vue";
+import TableTeachers from './tables/lounge/tableTeachers.vue';
+
+export default TableTeachers;
 </script>

@@ -1,3 +1,5 @@
 <script lang="ts">
-export { default } from "./tables/periods/tableAcademicPeriods.vue";
+import TableAcademicPeriods from './tables/periods/tableAcademicPeriods.vue';
+
+export default TableAcademicPeriods;
 </script>
