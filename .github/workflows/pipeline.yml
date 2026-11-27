@@ -212,9 +212,7 @@ jobs:
             pnpm run build
             
             export PATH=$PATH:/usr/local/nodejs/bin
-            if pm2 list | grep -q 'Front_Magno'; then
-              pm2 restart Front_Magno
-            else
-              pm2 start 'npx -y serve -s dist -p 3000' --name Front_Magno
-            fi
+            pm2 delete Front_Magno 2>/dev/null || true
+            pm2 start "npx -y serve -s $HOME/magno/frontend/dist -p 3000" --name Front_Magno
+            pm2 save || true
           EOF
